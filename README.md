@@ -6,5 +6,5 @@ To compile:
 
 To execute:
 
-    ./hashcode_solution
-
+    ./hashcode_solution -i <input file path>
+    e.g. ./hashcode_solution -i ../datasets/a_example.in
