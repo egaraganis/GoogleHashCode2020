@@ -13,6 +13,7 @@ Library::Library(int id,int numBooks,int signUpDays,int scanBooks,vector<int> bo
   this->signUpDays = signUpDays;
   this->scanBooks = scanBooks;
   this->books = book_ids;
+  this->checked = false;
 }
 
 void Library::setNumBooks(int numBooks){

@@ -108,6 +108,7 @@ int main(int argc, char *argv[]){
     cout << "Number of Days:" << numDays << endl;
     printBooks(Books);
     printLibraries(Libraries);
+    orestis(1, 2, 3, Books, Libraries, numDays);
 
     /*
     //int current_max_slices = 0;
