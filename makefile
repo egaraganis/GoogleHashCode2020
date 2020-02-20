@@ -5,14 +5,16 @@ SRC := sources
 OBJ := objects
 
 SOURCES := $(wildcard $(SRC)/*.cpp)
-OBJECTS := $(patsubst $(SRC)/%.cpp, $(OBJ)/%.o, $(SOURCES))
+OBJECTS := $(patsubst $(SRC)/%.cpp, %.o, $(SOURCES))
 
 hashcode_solution: $(OBJECTS)
 	$(CC) $(CFLAGS) solution/hashcode_solution.cpp $^ -o $@
+	rm -f $(OBJECTS)
 
-$(OBJ)/%.o: $(SRC)/%.cpp
+%.o: $(SRC)/%.cpp
 	$(CC) -I$(SRC) -c $< -o $@
 
+
 clean:
-	@rm -f D ./objects/*.o core
+	rm -f $(OBJECTS)
 	@rm -f hashcode_solution
