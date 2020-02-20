@@ -3,6 +3,8 @@
 #include <vector>
 #include <string>
 
+#include "../headers/helper_functions.h"
+
 using namespace std;
 
 
