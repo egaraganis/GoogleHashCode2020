@@ -24,5 +24,11 @@ int main(int argc, char *argv[]){
     if(input_file == "")
         cout << "No input file given" << endl;
 
+    // store input files data to variables
+    ifstream f(fileGiven);
+    string line;
+    while(getline(f, line))
+      cout << line << '\n';
+
     print_file(input_file);
 }
