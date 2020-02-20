@@ -1,11 +1,11 @@
 # GoogleHashCode2020
 
-To compile:
-
+Compilation:
     make
 
-To execute:
-
+Execution of a single input file:
     ./hashcode_solution -i <input file path>
-    
-    e.g. ./hashcode_solution -i ../datasets/a_example.in
+    e.g. ./hashcode_solution -i ./datasets/a_example.in
+
+To remove useless files, compile and execute all datasets straightaway, simple run:
+    ./runAll.sh

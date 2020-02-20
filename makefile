@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -g -Wall
+CFLAGS = -g -Wall -O3
 
 SRC := sources
 OBJ := objects
@@ -17,4 +17,4 @@ hashcode_solution: $(OBJECTS)
 
 clean:
 	rm -f $(OBJECTS)
-	@rm -f hashcode_solution
+	rm -f hashcode_solution

@@ -22,12 +22,12 @@ void print_file(string file_given){
       cout << line << '\n';
 }
 
-void export_file(string file_given,int types_of_pizza,vector<int> pizzas_selected){
+void export_file(string file_given, vector<int> pizzas_selected){
     string output_name = replace(file_given,".in",".out");
     cout << endl << "Printing to :" << output_name  << endl;
     ofstream output_file(output_name);
     if (output_file.is_open()){
-        output_file << types_of_pizza << endl;
+        output_file << pizzas_selected.size() << endl;
         for(uint i=0; i<pizzas_selected.size(); i++)
             output_file << pizzas_selected[i] << " ";
         output_file << endl;

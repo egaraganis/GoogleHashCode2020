@@ -4,6 +4,6 @@
 using namespace std;
 
 void print_file(string fileGiven);
-void export_file(string file_given,int types_of_pizza,vector<int> pizzas_selected);
+void export_file(string file_given, vector<int> pizzas_selected);
 
 #endif
