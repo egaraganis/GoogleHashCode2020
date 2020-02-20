@@ -4,6 +4,8 @@
 #include <string>
 #include <bits/stdc++.h>
 
+#include "../headers/Book.h"
+#include "../headers/Library.h"
 #include "../headers/helper_functions.h"
 
 using namespace std;
@@ -26,20 +28,26 @@ int main(int argc, char *argv[]){
         cout << "No input file given" << endl;
     else{
         cout << endl << "Printing file to see if it is ok...\n";
-        //print_file(input_file);
-        //cout << "-------------- \n\n";
+        print_file(input_file);
+        cout << "-------------- \n\n";
     }
 
     // store input files data to variables and structures
-    int max_slices_of_pizza = -1, different_types_of_pizza = -1;
-    vector < pair<int,int> > pizza_data;
+    int numBooks = -1;
+    int numLibraries = -1;
+    int numDays = -1;
+    vector <Book*> Books ;
+    vector <Library*> Libraries;
 
     ifstream f(input_file);
     string line;
     int noLine = 1;
+
+    int numLibrBooks=-1,signUpDays=-1,scanBooks=-1;
     while(getline(f, line)){
         istringstream ss(line); // Used to split line around spaces.
         int noWord = 1;
+        vector<int> book_ids;
         do { // Traverse through all words
             string word; // Read a word
             ss >> word;
@@ -47,18 +55,38 @@ int main(int argc, char *argv[]){
                 if(noLine == 1){
                     switch (noWord) {
                         case 1:
-                            max_slices_of_pizza = stoi(word);
+                            numBooks = stoi(word);
                         case 2:
-                            different_types_of_pizza = stoi(word);
+                            numLibraries = stoi(word);
+                        case 3:
+                            numDays = stoi(word);
                     }
                 }
+                else if(noLine == 2){
+                  //Book* newBook = new Book(noWord-1,stoi(word));
+                  //cout << "Book:" << word << endl;
+                  Books.push_back(new Book(noWord-1,stoi(word)));
+                }
+                else if(noLine%2 == 1){
+                  switch (noWord) {
+                      case 1:
+                          numLibrBooks = stoi(word);
+                      case 2:
+                          signUpDays = stoi(word);
+                      case 3:
+                          scanBooks = stoi(word);
+                  }
+                }
                 else {
-                    pizza_data.push_back(make_pair(stoi(word),noWord - 1));
+                  book_ids.push_back(stoi(word));
                 }
                 //cout << "Word:" <<  word << endl; // Print the read word
             }
             noWord++;
         } while (ss); // While there is more to read
+        if(noLine != 1 && noLine%2 != 1 && noLine !=2) {
+          Libraries.push_back(new Library(numLibrBooks,signUpDays,scanBooks,book_ids));
+        }
         noLine++;
         cout << endl;
     }
@@ -74,7 +102,13 @@ int main(int argc, char *argv[]){
 
     // ************************************************** //
 
-    cout << "****************************" << endl << "Oresti Pare:" << endl << "****************************" << endl;
+    cout << "Number of Books:" << numBooks << endl;
+    cout << "Number of Libraries:" << numLibraries << endl;
+    cout << "Number of Days:" << numDays << endl;
+    printBooks(Books);
+    printLibraries(Libraries);
+
+    /*
     //int current_max_slices = 0;
     int current_slices = 0;
 
@@ -103,6 +137,6 @@ int main(int argc, char *argv[]){
     cout << "Different Pizza Types: " << different_types_of_pizza << endl;
     cout << "Different Pizza Types Found: " << pizzas_selected.size() << endl;
 
-    export_file(input_file, pizzas_selected);
+    export_file(input_file, pizzas_selected);*/
 
 }
