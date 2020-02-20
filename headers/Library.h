@@ -10,7 +10,7 @@ class Library {
     int signUpDays;
     int scanBooks;
     std::vector<int> books;
-    Library(int numBooks,int signUpDays,int scanBooks,std::vector<int> book_ids);
+    Library(int id,int numBooks,int signUpDays,int scanBooks,std::vector<int> book_ids);
     void setNumBooks(int numBooks);
     void setSignUpDays(int signUpDays);
     void setScanBooks(int scanBooks);

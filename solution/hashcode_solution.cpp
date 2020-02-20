@@ -42,7 +42,7 @@ int main(int argc, char *argv[]){
     ifstream f(input_file);
     string line;
     int noLine = 1;
-
+    int currLID = 0;
     int numLibrBooks=-1,signUpDays=-1,scanBooks=-1;
     while(getline(f, line)){
         istringstream ss(line); // Used to split line around spaces.
@@ -68,6 +68,7 @@ int main(int argc, char *argv[]){
                   Books.push_back(new Book(noWord-1,stoi(word)));
                 }
                 else if(noLine%2 == 1){
+
                   switch (noWord) {
                       case 1:
                           numLibrBooks = stoi(word);
@@ -85,7 +86,7 @@ int main(int argc, char *argv[]){
             noWord++;
         } while (ss); // While there is more to read
         if(noLine != 1 && noLine%2 != 1 && noLine !=2) {
-          Libraries.push_back(new Library(numLibrBooks,signUpDays,scanBooks,book_ids));
+          Libraries.push_back(new Library(currLID++,numLibrBooks,signUpDays,scanBooks,book_ids));
         }
         noLine++;
         cout << endl;

@@ -7,7 +7,8 @@
 
 using namespace std;
 
-Library::Library(int numBooks,int signUpDays,int scanBooks,vector<int> book_ids){
+Library::Library(int id,int numBooks,int signUpDays,int scanBooks,vector<int> book_ids){
+  this->id = id;
   this->numBooks = numBooks;
   this->signUpDays = signUpDays;
   this->scanBooks = scanBooks;
