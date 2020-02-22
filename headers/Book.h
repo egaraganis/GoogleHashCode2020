@@ -3,17 +3,16 @@
 
 #include <vector>
 
+
 class Book {
-  public:
-    int id;
-    int score;
-    bool checked;
-    int getId() {return id;}
-    int getScore() {return score;}
-    bool isChecked() {return checked;}
-    Book(int id, int score);
+    public:
+        int id;
+        int score;
+        bool checked;
+        Book(int id, int score);
 };
 
 void printBooks(std::vector<Book*> books);
+
 
 #endif

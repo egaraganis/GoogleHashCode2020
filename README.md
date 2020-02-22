@@ -1,14 +1,9 @@
-# GoogleHashCode2020
+# GoogleHashCode2020 - Online Qualification Round
 
-Compilation:
+## Install - Run
 
-    make
+1. Compile: `make`
+2. Execute: `./hashcode_solution -i <input files paths>`
+       e.g. `./hashcode_solution -i ./datasets/a_example.txt ./datasets/b_read_on.txt`
 
-Execution of a single input file:
-
-    ./hashcode_solution -i <input file path>
-    e.g. ./hashcode_solution -i ./datasets/a_example.in
-
-To remove useless files, compile and execute all datasets straightaway, simple run:
-
-    ./runAll.sh
+Results on datasets folder (.out files)
