@@ -3,7 +3,6 @@
 ## Install - Run
 
 1. Compile: `make`
-2. Execute: `./hashcode_solution -i <input files paths>`
-       e.g. `./hashcode_solution -i ./datasets/a_example.txt ./datasets/b_read_on.txt`
+2. Execute: `./hashcode_solution -i ./datasets/a_example.txt ./datasets/b_read_on.txt <more input files paths>`
 
 Results on datasets folder (.out files)

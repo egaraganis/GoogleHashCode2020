@@ -1,12 +1,12 @@
 #include <iostream>
-#include <string>
 #include <vector>
+
 #include "../headers/Library.h"
 
 using namespace std;
 
 
-Library::Library(int id, int numBooks, int signUpDays, int scanBooks, vector<int> book_ids) {
+Library::Library(int id, int numBooks, int signUpDays, int scanBooks, vector<int>& book_ids) {
     this->id = id;
     this->numBooks = numBooks;
     this->signUpDays = signUpDays;
@@ -16,7 +16,7 @@ Library::Library(int id, int numBooks, int signUpDays, int scanBooks, vector<int
 }
 
 
-void printLibraries(vector<Library*> library) {
+void printLibraries(vector<Library*>& library) {
     cout << "---------Printing libraries:----------" << endl;
     for (int i = 0; i < library.size(); i++) {
         // Print current library's information

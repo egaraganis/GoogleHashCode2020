@@ -1,6 +1,4 @@
 #include <iostream>
-#include <fstream>
-#include <string>
 #include <vector>
 #include <bits/stdc++.h>
 
@@ -13,7 +11,7 @@ using namespace std;
 
 
 
-int mainAlgorithm(vector<Book*>& books, vector<Library*>& library, int numDays, vector<pair<int,vector<int>>>& Results) {
+int mainAlgorithm(vector<Book*>& books, vector<Library*>& library, int& numDays, vector<pair<int,vector<int>>>& Results) {
     // Keep total score to print on main
     uint total_score = 0;
 
@@ -59,7 +57,7 @@ int mainAlgorithm(vector<Book*>& books, vector<Library*>& library, int numDays, 
         cout << "Score of Library " << i << ": " << scoreCurLib << endl;
         total_score += scoreCurLib;
 
-        Results.push_back( make_pair(library[i]->id, lib_books));
+        Results.push_back(make_pair(library[i]->id, lib_books));
 
         library[i]->checked = true;
 

@@ -21,7 +21,7 @@ string replace(string& str, const string& from, const string& to) {
 }
 
 // Print a file given
-void print_file(string file_given) {
+void print_file(string& file_given) {
     ifstream f(file_given);
     string line;
     while (getline(f, line))
@@ -30,7 +30,7 @@ void print_file(string file_given) {
 
 
 // Read the file and store the arguments
-void import_File_Arguments(string file_given, int& numBooks, int& numLibraries, int& numDays,
+void import_File_Arguments(string& file_given, int& numBooks, int& numLibraries, int& numDays,
                                 vector<Book*>& Books, vector<Library*>& Libraries) {
     // Read input files
     ifstream f(file_given);
@@ -93,7 +93,7 @@ void import_File_Arguments(string file_given, int& numBooks, int& numLibraries, 
 
 
 // Export results onto a new output file
-void export_Results(string file_given, vector <pair <int, vector<int>> > Results) {
+void export_Results(string& file_given, vector <pair <int, vector<int>> >& Results) {
     // Give a name to the output file
     string output_name = replace(file_given,".txt",".out");
     cout << endl << "Printing to: " << output_name << endl;

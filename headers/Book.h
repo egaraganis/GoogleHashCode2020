@@ -12,7 +12,7 @@ class Book {
         Book(int id, int score);
 };
 
-void printBooks(std::vector<Book*> books);
+void printBooks(std::vector<Book*>& books);
 
 
 #endif
