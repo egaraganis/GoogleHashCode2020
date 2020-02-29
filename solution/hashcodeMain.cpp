@@ -35,9 +35,7 @@ int main(int argc, char *argv[]) {
         }
         cout << "----------------------------------------------" << endl;
     }
-    // Keep total score (from all files)
-    uint score = 0;
-
+    
     // Execution for all files
     for (uint i = 0; i < input_files.size(); i++) {
         // store input files data to variables and structures
@@ -71,9 +69,7 @@ int main(int argc, char *argv[]) {
         //printLibraries(Libraries);
 
         // Run an algorithm for best results (from solutions file)
-        uint current_score = mainAlgorithm(Books, Libraries, numDays, Results);
-        cout << "Score of file \"" << input_files[i] << "\": " << current_score << endl;
-        score += current_score;
+        mainAlgorithm(Books, Libraries, numDays, Results);
 
         // Print results in file
         export_Results(input_files[i], Results);
@@ -87,8 +83,5 @@ int main(int argc, char *argv[]) {
             delete Libraries[i];
         }
     }
-    cout << "Total Score: " << score << endl;
-    cout << "----------------------------------------------" << endl;
-
     return 0;
 }

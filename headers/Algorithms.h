@@ -8,7 +8,7 @@
 #include "./Input_Output.h"
 
 
-int mainAlgorithm(std::vector<Book*>& books, std::vector<Library*>& library, int& numDays,
+void mainAlgorithm(std::vector<Book*>& books, std::vector<Library*>& library, int& numDays,
                         std::vector<std::pair<int, std::vector<int>>>& Results);
 
 

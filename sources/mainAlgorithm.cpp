@@ -9,59 +9,68 @@
 
 using namespace std;
 
-
-
-int mainAlgorithm(vector<Book*>& books, vector<Library*>& library, int& numDays, vector<pair<int,vector<int>>>& Results) {
-    // Keep total score to print on main
-    uint total_score = 0;
-
-    // Repeat for every Library
-    for (int i = 0; i < library.size(); i++) {
-
-        vector<int> lib_books;
-        if (library[i]->checked)
-            continue;
-        int remainingDays = numDays - library[i]->signUpDays;
-        //cout <<i <<"<-id, remainingDays->" << remainingDays << endl;
-        //calculate magic
-        vector<int> currBooks = library[i]->books;
-        int remainingDays1 = remainingDays;
-
-        vector< pair <int,int> > currBookScores;
-        for (int b = 0; b < currBooks.size(); b++) {
-            for (int b1 = 0; b1 < books.size(); b1++) {
-                if (books[b1]->id == currBooks[b] && books[b1]->checked == false) {
-                    currBookScores.push_back( make_pair(books[b1]->score, currBooks[b]));
+void mainAlgorithm(vector<Book*>& books, vector<Library*>& library, int& numDays, vector<pair<int,vector<int>>>& Results) {
+    bool flag = true;
+    int a = -2;         //this is for the signup day
+    int b = -3;         //this is for the days that need for one book to be scanned
+    int c = 2;          // this is for the book scores
+    int statIndex = 0;
+    while(numDays > 0 && flag) {
+        int bestPosition = -1;
+        int bestScore;
+        vector<int> bestBooks;
+        for(int i=0; i<library.size(); i++) {
+            if(library[i]->signUpDays < numDays) {
+                int remainingDays = numDays - library[i]->signUpDays;
+                vector< pair <int,int> > currBookScores;
+                //get all the unchecked books of current library
+                for(int j=0; j<library[i]->books.size(); j++) {
+                    //find it in books by id
+                    if(!books[library[i]->books[j]]->checked)
+                        currBookScores.push_back( make_pair(books[library[i]->books[j]]->score, library[i]->books[j]));
                 }
-            }
-        }
-
-        // Using simple sort() function to sort
-        sort(currBookScores.begin(), currBookScores.end());
-
-        uint scoreCurLib = 0;
-        while (remainingDays > 0) {
-            remainingDays = remainingDays - library[i]->scanBooks;
-            if (currBookScores[currBookScores.size()-1].first != -100) {
-                lib_books.push_back(currBookScores[currBookScores.size()-1].second);
-                scoreCurLib += (uint) currBookScores[currBookScores.size()-1].first;
-                currBookScores[currBookScores.size()-1].first = -100;
-                for (int b1 = 0; b1 < books.size(); b1++) {
-                    if (books[b1]->id == currBookScores[currBookScores.size()-1].second) {
-                        books[b1]->checked = true;
+                // Using simple sort() function to sort by score the books of current library
+                if(currBookScores.size() > 0) {
+                    sort(currBookScores.begin(), currBookScores.end());
+                    vector<int> scannedBooks;
+                    int bookScore = (-1) * (library[i]->signUpDays + library[i]->scanBooks);         //here you can use a and b! (here a == b == -1)
+                    int currBooksPosition = currBookScores.size() -1;
+                    //while i have more days & more books
+                    bool noMoreBooks = false;
+                    while(remainingDays > 0 && !noMoreBooks) {
+                        for(int s=0; s < library[i]->scanBooks; s++) {
+                            bookScore += currBookScores[currBooksPosition].first;                   //here goes the c! (here c == 1)
+                            scannedBooks.push_back(currBookScores[currBooksPosition].second);
+                            currBooksPosition--;
+                            if(currBooksPosition < 0) {
+                                noMoreBooks = true;
+                                break;
+                            }
+                        }
+                        remainingDays--;
+                    }
+                    //if it is the first time or the current score is better, change the best library
+                    if (i == 0 || bookScore > bestScore) {
+                        bestPosition = i;
+                        bestScore = bookScore;
+                        bestBooks = scannedBooks;
                     }
                 }
-                sort(currBookScores.begin(), currBookScores.end());
             }
         }
-        cout << "Score of Library " << i << ": " << scoreCurLib << endl;
-        total_score += scoreCurLib;
-
-        Results.push_back(make_pair(library[i]->id, lib_books));
-
-        library[i]->checked = true;
-
-        //return 1;
+        //check the books that we got from the best library
+        vector<int> bestBooksIds;
+        for(int i=0; i<bestBooks.size(); i++) {
+            books[bestBooks[i]]->checked = true;
+            bestBooksIds.push_back(books[bestBooks[i]]->id);
+        }
+        if(bestPosition >= 0) {
+            cout << statIndex++ << ". Library: " << library[bestPosition]->id << " was selected!" << bestBooksIds.size() << " books were scanned!" << endl;
+            numDays -= library[bestPosition]->signUpDays;
+            Results.push_back(make_pair(library[bestPosition]->id, bestBooksIds));
+            library.erase(library.begin() + bestPosition);
+        }
+        if(library.size() == 0 || bestPosition == -1)
+            flag = false;
     }
-    return total_score;
 }

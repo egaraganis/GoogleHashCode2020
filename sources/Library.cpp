@@ -12,7 +12,7 @@ Library::Library(int id, int numBooks, int signUpDays, int scanBooks, vector<int
     this->signUpDays = signUpDays;
     this->scanBooks = scanBooks;
     this->books = book_ids;
-    this->checked = false;
+    this->score = 0;
 }
 
 
