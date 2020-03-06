@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
         }
         cout << "----------------------------------------------" << endl;
     }
-    
+
     // Execution for all files
     for (uint i = 0; i < input_files.size(); i++) {
         // store input files data to variables and structures
@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
         //printBooks(Books);
         //printLibraries(Libraries);
 
-        // Run an algorithm for best results (from solutions file)
+        // Run an algorithm for best results
         mainAlgorithm(Books, Libraries, numDays, Results);
 
         // Print results in file
