@@ -69,7 +69,10 @@ int main(int argc, char *argv[]) {
         //printLibraries(Libraries);
 
         // Run an algorithm for best results
-        mainAlgorithm(Books, Libraries, numDays, Results);
+        //mainAlgorithm(Books, Libraries, numDays, Results);
+
+        // Run another algorithm
+        secondAlgorithm(Books, Libraries, numDays, Results);
 
         // Print results in file
         export_Results(input_files[i], Results);

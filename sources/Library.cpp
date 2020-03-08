@@ -20,13 +20,15 @@ void printLibraries(vector<Library*>& library) {
     cout << "---------Printing libraries:----------" << endl;
     for (int i = 0; i < library.size(); i++) {
         // Print current library's information
-        cout << "id:" << library[i]->id << ",numBooks:" << library[i]->numBooks << "," << "signUpDays:"
-                << library[i]->signUpDays << "," << "scanBooks:" << library[i]->scanBooks << endl;
+        cout << "id:" << library[i]->id << ", numBooks:" << library[i]->numBooks << ", signUpDays:" << library[i]->signUpDays
+                << ", scanBooks:" << library[i]->scanBooks << ", score:" << library[i]->score << endl;
         // Print current library's book ids
-        for (int j = 0; j < library[i]->books.size(); j++) {
-            cout << library[i]->books[j] << " , ";
+        for (int j = 0; j < library[i]->finalBooks.size(); j++) {
+            /*if (j != library[i]->finalBooks.size()-1) {
+                cout << library[i]->finalBooks[j].first << " , ";
+            }
+            else cout << library[i]->finalBooks[j].first << endl;*/
         }
-        cout << endl;
     }
     cout << endl;
 }
