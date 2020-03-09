@@ -2,10 +2,10 @@
 #include <vector>
 #include <string>
 
-#include "../headers/Book.h"
-#include "../headers/Library.h"
-#include "../headers/Input_Output.h"
-#include "../headers/Algorithms.h"
+#include "./headers/Book.h"
+#include "./headers/Library.h"
+#include "./headers/Input_Output.h"
+#include "./headers/Algorithms.h"
 
 using namespace std;
 
@@ -51,7 +51,7 @@ int main(int argc, char *argv[]) {
         // Read file arguments and store them in the above variables
         import_File_Arguments(input_files[i], numBooks, numLibraries, numDays, Books, Libraries);
 
-        // *********** APO DO KAI KATO DIKO SAS  ************* //
+        // ********** NO DANGER, JUST FOR FUN!!  ************ //
 
         //    ██████╗░░█████╗░███╗░░██╗░██████╗░███████╗██████╗░
         //    ██╔══██╗██╔══██╗████╗░██║██╔════╝░██╔════╝██╔══██╗
@@ -71,8 +71,8 @@ int main(int argc, char *argv[]) {
         // Run an algorithm for best results
         //mainAlgorithm(Books, Libraries, numDays, Results);
 
-        // Run another algorithm
-        secondAlgorithm(Books, Libraries, numDays, Results);
+        // Run another, optimized algorithm
+        secondAlgorithm(Books, Libraries, numDays, Results, input_files[i]);
 
         // Print results in file
         export_Results(input_files[i], Results);

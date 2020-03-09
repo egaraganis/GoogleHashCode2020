@@ -1,5 +1,10 @@
 # GoogleHashCode2020 - Online Qualification Round
 
+## Results
+
+Our implementation was submitted on the extended round, achieving a total score of 25.397.215
+(listed 1378th position in total and 19th in Greece)
+
 ## Install - Run
 
 1. Compile: `make`

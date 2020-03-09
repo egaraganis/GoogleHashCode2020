@@ -8,7 +8,7 @@ SOURCES := $(wildcard $(SRC)/*.cpp)
 OBJECTS := $(patsubst $(SRC)/%.cpp, %.o, $(SOURCES))
 
 hashcode_solution: $(OBJECTS)
-	$(CC) $(CFLAGS) solution/hashcodeMain.cpp $^ -o $@
+	$(CC) $(CFLAGS) hashcodeMain.cpp $^ -o $@
 	rm -f $(OBJECTS)
 
 %.o: $(SRC)/%.cpp

@@ -10,10 +10,6 @@
 using namespace std;
 
 
-bool bookSort(const Book* a, const Book* b) {
-    return (a->score > b->score);
-}
-
 bool libraryScoreSort(const Library* a, const Library* b) {
     return (a->score > b->score);
 }
@@ -24,49 +20,73 @@ bool libraryScanSort(const Library* a, const Library* b) {
     return (a->scanBooks > b->scanBooks);
 }
 
+bool bookSort(const Book* a, const Book* b) {
+    return (a->score > b->score);
+}
 bool finalBookSort(const pair<int,int>& a, const pair<int,int>& b) {
     return (a.second > b.second);
 }
 
 
 
-void secondAlgorithm(vector<Book*>& books, vector<Library*>& libraries, int& numDays, vector<pair<int,vector<int>>>& Results) {
+// The idea of this implementation is that the vectors of libraries and books must be sorted according to different factors
+// Firstly, every file should be sorted by the signup days (more libraries in the system if those with small signup time come in first)
+// Then, for each library, we calculate their score and we also remove the duplicates books, both those on current and other libraries
+// At all libraries, their books are sorted by score, so those with best scores insert in the system first
+// For some files, another sorting in libraries, depending on their total score, is done
+
+void secondAlgorithm(vector<Book*>& books, vector<Library*>& libraries, int& numDays, vector<pair<int,vector<int>>>& Results, string filename) {
     // Sort books by their score
     //printBooks(books);
     //sort(books.begin(), books.end(), bookSort);
     //printBooks(books);
+
+    // Different sortings, depending on file
+    bool b = false, c = false, d = false, e = false, f = false;
+    size_t found = filename.find("b_read_on");
+    if (found != string::npos) b = true;
+    found = filename.find("c_incunabula");
+    if (found != string::npos) c = true;
+    found = filename.find("d_tough_choices");
+    if (found != string::npos) d = true;
+    found = filename.find("e_so_many_books");
+    if (found != string::npos) e = true;
+    found = filename.find("f_libraries_of_the_world");
+    if (found != string::npos) f = true;
 
     // If books are not sorted by score, then sort them first (signup or scan time) and then remove duplicates
     sort(libraries.begin(), libraries.end(), librarySignUpSort);
     //sort(libraries.begin(), libraries.end(), libraryScanSort);
 
     // Calculate total score, including dupicates (but not duplicates from the same library)
-    /*for (uint i = 0; i < libraries.size(); i++) {
-        // First check which books are contained in each library
-        for (uint j = 0; j < libraries[i]->books.size(); j++) {
-            // Keep current book's id
-            int tempBookId = libraries[i]->books[j];
-            // Find current book's score and then add it in library's score
-            vector<Book*>::iterator it;
-            Book *tempBook = new Book(libraries[i]->books[j], 0);
-            it = find_if(books.begin(), books.end(), [&tempBookId](const Book* tempBook) {return tempBook->id == tempBookId;});
-            if (it != books.end()) {
-                //cout << libraries[i]->books[j] << "  " << (*it)->id << " - " << (*it)->score << endl;
-                bool bookPreviouslyFound = false;
-                for (uint k = 0; k < j; k++) {
-                    if (libraries[i]->books[k] == tempBookId) {
-                        bookPreviouslyFound = true;
-                        break;
+    if (d) {
+        for (uint i = 0; i < libraries.size(); i++) {
+            // First check which books are contained in each library
+            for (uint j = 0; j < libraries[i]->books.size(); j++) {
+                // Keep current book's id
+                int tempBookId = libraries[i]->books[j];
+                // Find current book's score and then add it in library's score
+                vector<Book*>::iterator it;
+                Book *tempBook = new Book(libraries[i]->books[j], 0);
+                it = find_if(books.begin(), books.end(), [&tempBookId](const Book* tempBook) {return tempBook->id == tempBookId;});
+                if (it != books.end()) {
+                    //cout << libraries[i]->books[j] << "  " << (*it)->id << " - " << (*it)->score << endl;
+                    bool bookPreviouslyFound = false;
+                    for (uint k = 0; k < j; k++) {
+                        if (libraries[i]->books[k] == tempBookId) {
+                            bookPreviouslyFound = true;
+                            break;
+                        }
+                    }
+                    if (!bookPreviouslyFound) {
+                        libraries[i]->score += (*it)->score;
                     }
                 }
-                if (!bookPreviouslyFound) {
-                    libraries[i]->score += (*it)->score;
-                }
+                delete tempBook;
             }
-            delete tempBook;
         }
+        sort(libraries.begin(), libraries.end(), libraryScoreSort);
     }
-    sort(libraries.begin(), libraries.end(), libraryScoreSort);*/
 
     // Keep each book only once
     vector<int> uniqueBooks;
@@ -113,8 +133,10 @@ void secondAlgorithm(vector<Book*>& books, vector<Library*>& libraries, int& num
     //printLibraries(libraries);
 
     // Sort libraries by their score
-    sort(libraries.begin(), libraries.end(), libraryScoreSort);
-    printLibraries(libraries);
+    if (e || f || d) {
+        sort(libraries.begin(), libraries.end(), libraryScoreSort);
+    }
+    //printLibraries(libraries);
 
     // Attach libraries and their books on final (results) vector
     for (uint i = 0; i < libraries.size(); i++) {
