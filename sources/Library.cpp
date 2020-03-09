@@ -23,12 +23,12 @@ void printLibraries(vector<Library*>& library) {
         cout << "id:" << library[i]->id << ", numBooks:" << library[i]->numBooks << ", signUpDays:" << library[i]->signUpDays
                 << ", scanBooks:" << library[i]->scanBooks << ", score:" << library[i]->score << endl;
         // Print current library's book ids
-        for (int j = 0; j < library[i]->finalBooks.size(); j++) {
-            /*if (j != library[i]->finalBooks.size()-1) {
+        /*for (int j = 0; j < library[i]->finalBooks.size(); j++) {
+            if (j != library[i]->finalBooks.size()-1) {
                 cout << library[i]->finalBooks[j].first << " , ";
             }
-            else cout << library[i]->finalBooks[j].first << endl;*/
-        }
+            else cout << library[i]->finalBooks[j].first << endl;
+        }*/
     }
     cout << endl;
 }
