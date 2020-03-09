@@ -1,7 +1,8 @@
 # GoogleHashCode2020 - Extended Round
 
 ## Results
-Our implementation was submitted on the extended round, achieving a total score of 25,397,215 (best score was 27,211,866)
+Our implementation was submitted on the extended round, achieving a total score of 25,397,215 (best score: 27,211,866)
+
 ![Screenshot](HashCode_Results.png)
 
 ## Algorithm
